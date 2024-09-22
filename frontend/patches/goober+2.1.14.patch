@@ -1,0 +1,12 @@
+diff --git a/node_modules/goober/goober.d.ts b/node_modules/goober/goober.d.ts
+index e3bb5da..2057f58 100644
+--- a/node_modules/goober/goober.d.ts
++++ b/node_modules/goober/goober.d.ts
+@@ -1,6 +1,6 @@
+ import { Properties as CSSProperties } from 'csstype';
+ 
+-export = goober;
++export default goober;
+ 
+ export as namespace goober;
+ 
