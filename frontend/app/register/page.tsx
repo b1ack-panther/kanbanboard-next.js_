@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,12 +14,13 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useAppDispatch } from "@/store/hooks";
 import { setCredentials } from "@/store/authSlice";
 import Loader from "@/components/Loader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useAxios } from "@/hooks/axios";
 
 const registerFormSchema = z.object({
 	fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -31,8 +31,9 @@ const registerFormSchema = z.object({
 type registerFormData = z.infer<typeof registerFormSchema>;
 
 const RegisterPage = () => {
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
 	const router = useRouter();
+	const axios = useAxios();
 
 	const {
 		register,
@@ -42,10 +43,7 @@ const RegisterPage = () => {
 
 	const onSubmit = async (formData: registerFormData) => {
 		try {
-			const res = await axios.post(
-				`/auth/register`,
-				formData
-			);
+			const res = await axios.post(`/auth/register`, formData);
 			const accessToken = res?.data?.accessToken;
 			dispatch(setCredentials({ accessToken }));
 			toast.success("User created successfully");

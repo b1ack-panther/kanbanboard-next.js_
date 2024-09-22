@@ -12,6 +12,7 @@ export default function Home() {
 	const auth = useAuth();
 
 	if (!auth || !auth.token) router.push("/sign-in");
+
 	if (view !== "card" && view !== "list") router.push("/?view=list");
 
 	return (

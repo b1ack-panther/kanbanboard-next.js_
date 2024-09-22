@@ -1,15 +1,6 @@
 import { Task } from "@/types-env.d";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { makeStore } from "./store";
-
-const store = makeStore();
-store.subscribe(listener);
-
-function listener() {
-	const token = store.getState().auth.token;
-	api.defaults.headers.common["Authorization"] = token;
-}
 
 export const getToken = () => {
 	const token = localStorage.getItem("token")

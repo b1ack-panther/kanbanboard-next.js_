@@ -1,6 +1,6 @@
 "use client";
 
-// import { RootState } from "@/store/store";
+import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 
@@ -12,7 +12,7 @@ interface useAuth {
 }
 
 export const useAuth = () => {
-	const { token } = useSelector((state) => state.auth);
+	const { token } = useSelector((state: RootState) => state.auth);
 	if (!token) return null;
 
 	const decodedUser = jwtDecode(token);

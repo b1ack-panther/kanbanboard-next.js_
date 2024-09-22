@@ -20,7 +20,9 @@ import {
 	CardDescription,
 } from "@/components/ui/card";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useAxios } from "@/hooks/axios";
+import toast from "react-hot-toast";
+import { api } from "@/store/taskSlice";
 
 const signInSchema = z.object({
 	email: z.string().email("Invalid email address"),
@@ -32,6 +34,7 @@ type SignInFormData = z.infer<typeof signInSchema>;
 export default function SignInPage() {
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const axios = useAxios();
 
 	const {
 		register,
@@ -43,13 +46,15 @@ export default function SignInPage() {
 
 	const onSubmit = async (formData: SignInFormData) => {
 		try {
-			const res = await axios.post(
-				`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/auth/sign-in`,
-				formData
-			);
+			const res = await axios.post(`/auth/sign-in`, formData);
+			if (res.status !== 200) throw new Error("login failed");
 			const accessToken = res?.data?.accessToken;
 			dispatch(setCredentials({ accessToken }));
-			router.push("/?view=list");
+			setTimeout(() => {
+				router.push("/");
+			}, 1000);
+			api.defaults.headers.common["Authorization"] = accessToken;
+			toast.success("Login successful");
 		} catch (error) {
 			console.log(error);
 		}

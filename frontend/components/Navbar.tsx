@@ -7,14 +7,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { logout } from "@/store/authSlice";
 import { useAuth } from "@/hooks/useAuth";
-import { useAxios } from "@/hooks/axios";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 export default function Navbar() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const view = useSearchParams().get("view");
-	const axios = useAxios();
 
 	const token = useAuth();
 	if (!token) {
@@ -24,8 +23,10 @@ export default function Navbar() {
 	const handleLogout = async () => {
 		try {
 			dispatch(logout());
-			await axios.post("/auth/logout");
-			router.push("/sign-in");
+			await axios.post(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/auth/logout`);
+			setTimeout(() => {
+				router.push("/sign-in");
+			}, 500);
 		} catch (error) {
 			console.log(error);
 		}
