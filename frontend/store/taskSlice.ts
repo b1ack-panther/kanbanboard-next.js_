@@ -3,9 +3,8 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getToken = () => {
-	const token = localStorage.getItem("token")
-		? localStorage.getItem("token") ?? ""
-		: null;
+	const token =
+		typeof window !== "undefined" ? localStorage.getItem("token") ?? "" : null;
 	return token;
 };
 
