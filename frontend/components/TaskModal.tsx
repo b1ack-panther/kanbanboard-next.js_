@@ -28,7 +28,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { useEffect } from "react";
-import { Task } from "@/types-env";
+import { Priority, Status, Task } from "@/types-env";
 import { useAppDispatch } from "@/store/hooks";
 import { createTask, updateTask } from "@/store/taskSlice";
 
@@ -62,10 +62,10 @@ const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
 
 	useEffect(() => {
 		if (task) {
-			form.setValue("title", task.title);
-			form.setValue("description", task.description);
-			form.setValue("status", task.status);
-			form.setValue("priority", task.priority);
+			if (task.title) form.setValue("title", task.title);
+			if (task.description) form.setValue("description", task.description);
+			if (task.status) form.setValue("status", task.status);
+			if (task.priority) form.setValue("priority", task.priority);
 			if (task.dueDate)
 				form.setValue(
 					"dueDate",
@@ -77,8 +77,15 @@ const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
 	const dispatch = useAppDispatch();
 
 	const handleFormSubmit = async (data: TaskFormData) => {
-		if (task) dispatch(updateTask({ ...data, _id: task._id } as Task));
-		else dispatch(createTask(data as Task));
+		if (task)
+			dispatch(
+				updateTask({
+					...data,
+					_id: task._id,
+					dueDate: new Date(data?.dueDate ?? ""),
+				} as Task)
+			);
+		else dispatch(createTask(task as Omit<Task, "_id">));
 		form.reset();
 		onClose();
 	};
