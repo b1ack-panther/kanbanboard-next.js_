@@ -27,37 +27,33 @@ const initialState: TaskState = {
 	error: null,
 };
 
-// Async thunk to fetch tasks from the API
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
 	const response = await api.get("/task");
-	return response.data; // The data should be an array of tasks
+	return response.data;
 });
 
-// Async thunk to create a new task in the database
 export const createTask = createAsyncThunk(
 	"tasks/createTask",
 	async (newTask: Omit<Task, "_id">) => {
 		const response = await api.post("/task", newTask);
-		return response.data; // Return the created task
+		return response.data;
 	}
 );
 
-// Async thunk to update a task in the database
 export const updateTask = createAsyncThunk(
 	"tasks/updateTask",
 	async (updatedTask: Partial<Task>) => {
 		const { _id, ...taskData } = updatedTask;
 		const response = await api.put(`/task/${_id}`, taskData);
-		return response.data; // Return the updated task
+		return response.data;
 	}
 );
 
-// Async thunk to delete a task from the database
 export const deleteTask = createAsyncThunk(
 	"tasks/deleteTask",
 	async (taskId: string) => {
 		await api.delete(`/task/${taskId}`);
-		return taskId; // Return the deleted task ID
+		return taskId;
 	}
 );
 
@@ -66,7 +62,6 @@ const taskSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		// Handle fetchTasks actions
 		builder.addCase(fetchTasks.pending, (state) => {
 			state.loading = true;
 			state.error = null;
@@ -83,7 +78,6 @@ const taskSlice = createSlice({
 			state.error = action.error.message || "Failed to fetch tasks";
 		});
 
-		// Handle createTask actions
 		builder.addCase(createTask.pending, (state) => {
 			state.loading = true;
 		});
@@ -91,7 +85,7 @@ const taskSlice = createSlice({
 			createTask.fulfilled,
 			(state, action: PayloadAction<Task>) => {
 				state.loading = false;
-				state.tasks.push(action.payload); // Add the new task to the state
+				state.tasks.push(action.payload);
 			}
 		);
 		builder.addCase(createTask.rejected, (state, action) => {
@@ -99,7 +93,6 @@ const taskSlice = createSlice({
 			state.error = action.error.message || "Failed to create task";
 		});
 
-		// Handle updateTask actions
 		builder.addCase(updateTask.pending, (state) => {
 			state.loading = true;
 		});
@@ -111,7 +104,7 @@ const taskSlice = createSlice({
 					(task) => task._id === action.payload._id
 				);
 				if (index !== -1) {
-					state.tasks[index] = action.payload; // Update the task in the state
+					state.tasks[index] = action.payload;
 				}
 			}
 		);
@@ -120,7 +113,6 @@ const taskSlice = createSlice({
 			state.error = action.error.message || "Failed to update task";
 		});
 
-		// Handle deleteTask actions
 		builder.addCase(deleteTask.pending, (state) => {
 			state.loading = true;
 		});
@@ -128,7 +120,7 @@ const taskSlice = createSlice({
 			deleteTask.fulfilled,
 			(state, action: PayloadAction<string>) => {
 				state.loading = false;
-				state.tasks = state.tasks.filter((task) => task._id !== action.payload); // Remove the task
+				state.tasks = state.tasks.filter((task) => task._id !== action.payload);
 			}
 		);
 		builder.addCase(deleteTask.rejected, (state, action) => {
