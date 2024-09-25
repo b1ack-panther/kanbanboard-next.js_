@@ -1,4 +1,5 @@
 const Task = require("../models/Task.model.js");
+const User = require("../models/User.model.js");
 
 exports.getTasks = async (req, res) => {
 	try {
@@ -28,7 +29,7 @@ exports.createTask = async (req, res) => {
 
 	try {
 		const task = await Task.create(taskData);
-
+		await User.findByIdAndUpdate(req.id, { $push: { tasks: task._id } });
 		return res.status(201).json(task);
 	} catch (error) {
 		return res.status(400).json({ error: "Failed to create task" });

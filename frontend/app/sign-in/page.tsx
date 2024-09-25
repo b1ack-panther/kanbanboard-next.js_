@@ -22,7 +22,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useAxios } from "@/hooks/axios";
 import toast from "react-hot-toast";
-import { api } from "@/store/taskSlice";
+import { setAuthorizationHeader } from "@/store/taskSlice";
 
 const signInSchema = z.object({
 	email: z.string().email("Invalid email address"),
@@ -44,16 +44,18 @@ export default function SignInPage() {
 		resolver: zodResolver(signInSchema),
 	});
 
+	let accessToken: string;
+
 	const onSubmit = async (formData: SignInFormData) => {
 		try {
 			const res = await axios.post(`/auth/sign-in`, formData);
 			if (res.status !== 200) throw new Error("login failed");
-			const accessToken = res?.data?.accessToken;
+			accessToken = res?.data?.accessToken;
 			dispatch(setCredentials({ accessToken }));
+			setAuthorizationHeader(accessToken);
 			setTimeout(() => {
 				router.push("/");
-			}, 1000);
-			api.defaults.headers.common["Authorization"] = accessToken;
+			}, 500);
 			toast.success("Login successful");
 		} catch (error) {
 			console.log(error);

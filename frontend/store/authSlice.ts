@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { store } from "./store";
 
 interface initialState {
 	token: string | null;

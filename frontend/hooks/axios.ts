@@ -49,7 +49,7 @@ export const useAxios = () => {
 			axiosInstance.interceptors.request.eject(requestInterceptor);
 			axiosInstance.interceptors.response.eject(responseInterceptor);
 		};
-	}, [token]);
+	}, [token, dispatch]);
 
 	return axiosInstance;
 };

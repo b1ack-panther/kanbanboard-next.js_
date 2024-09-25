@@ -2,6 +2,14 @@ import { Task } from "@/types-env.d";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
+export const setAuthorizationHeader = (token: string | null) => {
+	if (token) {
+		api.defaults.headers.Authorization = `Bearer ${token}`;
+	} else {
+		delete api.defaults.headers.Authorization;
+	}
+};
+
 export const getToken = () => {
 	const token =
 		typeof window !== "undefined" ? localStorage.getItem("token") ?? "" : null;
@@ -60,7 +68,11 @@ export const deleteTask = createAsyncThunk(
 const taskSlice = createSlice({
 	name: "tasks",
 	initialState,
-	reducers: {},
+	reducers: {
+		setTasks: (state, action) => {
+			state.tasks = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchTasks.pending, (state) => {
 			state.loading = true;
@@ -131,3 +143,4 @@ const taskSlice = createSlice({
 });
 
 export default taskSlice.reducer;
+export const { setTasks } = taskSlice.actions;
