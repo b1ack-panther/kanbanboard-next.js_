@@ -6,7 +6,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Status, Task } from "@/types-env.d";
 import TaskModal from "./TaskModal";
 import { useAppDispatch } from "@/store/hooks";
-import { updateTask } from "@/store/taskSlice";
+import { useAxios } from "@/hooks/axios";
 
 type CardColumnProps = {
 	headingColor: string;
@@ -24,7 +24,7 @@ const CardColumn: React.FC<CardColumnProps> = ({
 	const [active, setActive] = useState(false);
 	const [dialog, setDialog] = useState(false);
 
-	const dispatch = useAppDispatch();
+	const axios = useAxios();
 
 	const handleDragStart = (e: React.DragEvent, card: Task) => {
 		e.dataTransfer.setData("cardId", card._id);
@@ -35,8 +35,8 @@ const CardColumn: React.FC<CardColumnProps> = ({
 
 		setActive(false);
 		clearHighlights();
-		// axios.put(`/task/${cardId}`, { status: column });
-		dispatch(updateTask({ _id: cardId, status: column }));
+		axios.put(`/task/${cardId}`, { status: column });
+		// dispatch(updateTask({ _id: cardId, status: column }));
 
 		const { element } = getNearestIndicator(e);
 
