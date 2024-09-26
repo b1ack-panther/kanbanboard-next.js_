@@ -9,8 +9,10 @@ import { logout } from "@/store/authSlice";
 import { useAuth } from "@/hooks/useAuth";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { Suspense } from "react";
+import Loader from "./Loader";
 
-export default function Navbar() {
+function Navbar() {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const view = useSearchParams().get("view");
@@ -72,5 +74,14 @@ export default function Navbar() {
 				</Button>
 			</div>
 		</nav>
+	);
+}
+
+
+export default function SuspenseNavbar() {
+	return (
+		<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
+			<Navbar />
+		</Suspense>
 	);
 }

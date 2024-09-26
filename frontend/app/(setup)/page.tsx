@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-export default function Home() {
+function Home() {
 	const view = useSearchParams().get("view");
 	const router = useRouter();
 	const auth = useAuth();
@@ -20,4 +20,12 @@ export default function Home() {
 			{view === "card" ? <CardView /> : <ListView />}
 		</Suspense>
 	);
+}
+
+export default function SuspenseHome() {
+		return (
+			<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
+				<Home />
+			</Suspense>
+		);
 }
