@@ -16,9 +16,7 @@ function Home() {
 	if (view !== "card") router.push("/?view=list");
 
 	return (
-		<Suspense fallback={<Loader className="w-10 h-10 mt-10 mx-auto" />}>
-			{view === "card" ? <CardView /> : <ListView />}
-		</Suspense>
+			view === "card" ? <CardView /> : <ListView />
 	);
 }
 

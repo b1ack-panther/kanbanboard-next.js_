@@ -88,7 +88,7 @@ const CardColumn: React.FC<CardColumnProps> = ({
 	};
 
 	const getNearestIndicator = (e: React.DragEvent) => {
-		const DISTANCE_OFFSET = 50;
+		const DISTANCE_OFFSET = 150;
 		const indicators = getIndicators();
 
 		const el = indicators.reduce(
