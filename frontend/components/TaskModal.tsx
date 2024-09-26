@@ -85,7 +85,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, task }) => {
 					dueDate: new Date(data?.dueDate ?? ""),
 				} as Task)
 			);
-		else dispatch(createTask(task as Omit<Task, "_id">));
+		else dispatch(createTask(data as unknown as Omit<Task, "_id">));
 		form.reset();
 		onClose();
 	};

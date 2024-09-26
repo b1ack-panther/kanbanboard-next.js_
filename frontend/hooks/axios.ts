@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 
 const axiosInstance = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_SERVER_DOMAIN,
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
 export const useAxios = () => {

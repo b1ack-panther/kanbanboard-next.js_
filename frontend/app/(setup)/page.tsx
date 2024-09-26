@@ -13,7 +13,7 @@ function Home() {
 
 	if (!auth || !auth.token) router.push("/sign-in");
 
-	if (view !== "card" && view !== "list") router.push("/?view=list");
+	if (view !== "card") router.push("/?view=list");
 
 	return (
 		<Suspense fallback={<Loader className="w-10 h-10 mt-10 mx-auto" />}>
@@ -23,9 +23,9 @@ function Home() {
 }
 
 export default function SuspenseHome() {
-		return (
-			<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
-				<Home />
-			</Suspense>
-		);
+	return (
+		<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
+			<Home />
+		</Suspense>
+	);
 }
