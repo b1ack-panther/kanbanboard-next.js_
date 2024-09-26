@@ -1,4 +1,6 @@
+import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
+import { Suspense } from "react";
 
 export const metadata = {
 	title: "Next.js",
@@ -14,7 +16,9 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				<Navbar />
-				{children}
+				<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
+					{children}
+				</Suspense>
 			</body>
 		</html>
 	);

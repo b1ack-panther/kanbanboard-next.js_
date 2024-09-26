@@ -53,9 +53,7 @@ export default function SignInPage() {
 			accessToken = res?.data?.accessToken;
 			dispatch(setCredentials({ accessToken }));
 			setAuthorizationHeader(accessToken);
-			setTimeout(() => {
-				router.push("/");
-			}, 500);
+			router.push("/");
 			toast.success("Login successful");
 		} catch (error) {
 			console.log(error);
