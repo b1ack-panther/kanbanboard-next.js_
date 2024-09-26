@@ -9,7 +9,7 @@ const verifyJWT = (req, res, next) => {
 		req.id = decoded.id;
 		next();
 	} catch (error) {
-		res.status(403).json({ error: "Forbidden" });
+		return res.status(403).json({ error: "Forbidden" });
 	}
 };
 
