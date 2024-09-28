@@ -20,7 +20,7 @@ function Home() {
 
 export default function SuspenseHome() {
 	return (
-		<Suspense fallback={<Loader className="mx-auto w-12 h-12 mt-10 " />}>
+		<Suspense>
 			<Home />
 		</Suspense>
 	);
