@@ -105,7 +105,7 @@ const CardColumn: React.FC<CardColumnProps> = ({
 			},
 			{
 				offset: Number.NEGATIVE_INFINITY,
-				element: indicators[0],
+				element: indicators[indicators.length-1],
 			}
 		);
 

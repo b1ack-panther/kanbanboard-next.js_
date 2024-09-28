@@ -1,7 +1,6 @@
 "use client";
 import CardView from "@/components/CardView";
 import ListView from "@/components/ListView";
-import Loader from "@/components/Loader";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";

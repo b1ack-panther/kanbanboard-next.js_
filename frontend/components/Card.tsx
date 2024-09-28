@@ -23,9 +23,9 @@ const TaskCard = ({ handleDragStart, column, card }: CardProps) => {
 			<div
 				draggable="true"
 				onDragStart={(e: React.DragEvent) => handleDragStart(e, card)}
-				className="cursor-grab rounded border border-neutral-700  font-mono bg-neutral-800 p-3 md:p-6 active:cursor-grabbing"
+				className="cursor-grab  active:cursor-grabbing"
 			>
-				<Card className="bg-neutral-800 border-none">
+				<Card className=" border-none bg-neutral-800/50 backdrop-blur-[2px]  p-3 md:p-6 font-mono border-neutral-700 rounded border">
 					<CardHeader className="text-xl md:text-3xl font-mono font-bold text-white capitalize p-0 pb-5">
 						<CardTitle>{card.title}</CardTitle>
 					</CardHeader>
