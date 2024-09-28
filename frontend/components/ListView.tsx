@@ -74,11 +74,11 @@ export default function TaskListView() {
 			</div>
 
 			{/* Filters */}
-			<div className="mb-4 flex gap-4 max-md:gap-2 mx-2">
+			<div className="mb-4 flex gap-4 max-md:gap-2 mx-2 ">
 				{/* Filter by Status */}
-				<Select onValueChange={setFilterStatus}>
-					<SelectTrigger className="max-w-[180px]">
-						<SelectValue placeholder="Filter by Status" />
+				<Select  onValueChange={setFilterStatus}>
+					<SelectTrigger className="max-w-[180px] bg-white">
+						<SelectValue placeholder="Status" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -93,8 +93,8 @@ export default function TaskListView() {
 
 				{/* Filter by Priority */}
 				<Select onValueChange={setFilterPriority}>
-					<SelectTrigger className="max-w-[180px]">
-						<SelectValue placeholder="Filter by Priority" />
+					<SelectTrigger className="max-w-[180px] bg-white">
+						<SelectValue placeholder="Priority" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -109,8 +109,8 @@ export default function TaskListView() {
 
 				{/* Sort by Due Date */}
 				<Select onValueChange={setSortByDate}>
-					<SelectTrigger className="max-w-[180px]">
-						<SelectValue placeholder="Sort by Due Date" />
+					<SelectTrigger className="max-w-[180px] bg-white">
+						<SelectValue placeholder="Due Date" />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -123,8 +123,8 @@ export default function TaskListView() {
 			</div>
 
 			{/* Task Table */}
-			<Table>
-				<TableHeader className="font-semibold text-lg">
+			<Table className="text-center capitalize">
+				<TableHeader className="font-semibold text-lg text-center">
 					<TableRow>
 						<TableCell>Title</TableCell>
 						<TableCell>Status</TableCell>

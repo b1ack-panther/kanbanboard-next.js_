@@ -24,7 +24,7 @@ export default function CardView() {
 	if (!cards?.length) return <Loader className="w-12 h-12 mx-auto mt-7" />;
 
 	return (
-		<div className="min-h-[calc(100vh-78px)]  w-full bg-neutral-900 text-neutral-50">
+		<div className="min-h-[calc(100vh-78px)] card-view  w-full  text-neutral-50">
 			<div className="flex max-sm:flex-col max-sm:items-center w-full gap-5 xl:gap-10 max-sm:gap-7 overflow-hidden p-5 md:p-12 justify-center ">
 				<CardColumn
 					column={Status.TODO}

@@ -35,7 +35,7 @@ function Navbar() {
 	};
 
 	return (
-		<nav className="flex sticky top-0 items-center justify-between p-4 bg-background border-b drop-shadow-md">
+		<nav className="flex sticky top-0 items-center justify-between p-4 bg-zinc-200/90 border-b drop-shadow-md">
 			<Link href="#" className="flex max-h-20 items-center">
 				<Image
 					src="/logo.png"

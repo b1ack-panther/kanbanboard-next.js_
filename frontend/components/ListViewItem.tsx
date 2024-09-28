@@ -18,8 +18,8 @@ const ListViewItem = ({ task, handleEdit }: ListViewItemProps) => {
 	};
 
 	return (
-		<TableRow key={task._id}>
-			<TableCell className="line-clamp-1">{task.title}</TableCell>
+		<TableRow className="align-middle items-center text-center" key={task._id}>
+			<TableCell className="overflow-hidden font-medium text-base">{task.title}</TableCell>
 			<TableCell>{task.status}</TableCell>
 			<TableCell>{task.priority}</TableCell>
 			<TableCell className="max-md:hidden">{getDate(task.dueDate)}</TableCell>

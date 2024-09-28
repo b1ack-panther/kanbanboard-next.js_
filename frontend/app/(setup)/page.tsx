@@ -13,11 +13,9 @@ function Home() {
 
 	if (!auth || !auth.token) router.push("/sign-in");
 
-	if (view !== "card") router.push("/?view=list");
-
-	return (
-			view === "card" ? <CardView /> : <ListView />
-	);
+	if (view !== "card" && view !== "list") router.push("/sign-in");
+	else if (view == "card") return <CardView />;
+	return <ListView />;
 }
 
 export default function SuspenseHome() {
