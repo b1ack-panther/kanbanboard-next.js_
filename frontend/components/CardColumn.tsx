@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Status, Task } from "@/types-env.d";
 import TaskModal from "./TaskModal";
-import { useAppDispatch } from "@/store/hooks";
 import { useAxios } from "@/hooks/axios";
 
 type CardColumnProps = {

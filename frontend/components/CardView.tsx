@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchTasks } from "@/store/taskSlice";
 
 export default function CardView() {
-	const [cards, setCards] = useState<Task[]>([]);
+	const [cards, setCards] = useState<Task[]>(null);
 
 	const dispatch = useAppDispatch();
 	const tasks = useAppSelector((state) => state.task.tasks);
@@ -21,7 +21,9 @@ export default function CardView() {
 		setCards(tasks);
 	}, [tasks]);
 
-	if (!cards?.length) return <Loader className="w-12 h-12 mx-auto mt-7" />;
+	
+	if (!cards) return <Loader className="w-12 h-12 mx-auto mt-7" />;
+	if(!cards?.length)return <h1 className=" w-full text-center text-3xl mt-5 p-5 bg-muted-foreground/20 font-mono">No Task found</h1>
 
 	return (
 		<div className="min-h-[calc(100vh-78px)] card-view  w-full  text-neutral-50">
